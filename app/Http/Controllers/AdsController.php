@@ -16,7 +16,7 @@ class AdsController extends Controller
     {
         Ad::create($request->all());
 
-        return response()->json(["message"=>"Ad created"],200);
+        return response()->json(['success' => true,"message"=>"Ad created"],200);
     }
 
     public function show($id)
@@ -28,13 +28,13 @@ class AdsController extends Controller
     {
         $ad->update($request->all());
 
-        return response()->json(["message"=>"Ad updated"],200);;
+        return response()->json(['success' => true,"message"=>"Ad updated"],200);;
     }
 
     public function destroy($id)
     {
         $ad=Ad::find($id);
         $ad->delete();
-        return response()->json(["message"=>"Ad deleted"],200);;
+        return response()->json(['success' => true,"message"=>"Ad deleted"],200);;
     }
 }

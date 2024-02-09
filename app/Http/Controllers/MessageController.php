@@ -16,7 +16,7 @@ class MessageController extends Controller
     {
         Message::create($request->all());
 
-        return response()->json(["message"=>"Message created"],200);
+        return response()->json(['success' => true,"message"=>"Message created"],200);
     }
 
 }
