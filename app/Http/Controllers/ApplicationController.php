@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Application\StoreRequest;
 use App\Models\Application;
-use Illuminate\Http\Request;
 
 class ApplicationController extends Controller
 {
 
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
         Application::create($request->all());
 

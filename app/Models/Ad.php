@@ -17,4 +17,12 @@ class Ad extends Model
         'from',
         'until',
     ];
+    public function image()
+    {
+        return $this->hasMany(Image::class);
+    }
+    public function ad_tag()
+    {
+        return $this->hasMany(Ad_tag::class);
+    }
 }

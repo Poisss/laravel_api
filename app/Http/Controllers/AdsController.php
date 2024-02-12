@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Ad\StoreRequest;
 use App\Models\Ad;
-use Illuminate\Http\Request;
 
 class AdsController extends Controller
 {
@@ -12,7 +12,7 @@ class AdsController extends Controller
         return Ad::all();
     }
 
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
         Ad::create($request->all());
 
@@ -24,7 +24,7 @@ class AdsController extends Controller
         return Ad::find($id);
     }
 
-    public function update(Ad $ad,Request $request)
+    public function update(Ad $ad,StoreRequest $request)
     {
         $ad->update($request->all());
 

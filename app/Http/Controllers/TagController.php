@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\TagRequest;
+use App\Http\Requests\Tag\StoreRequest;
 use App\Models\Tag;
-use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
@@ -13,14 +12,14 @@ class TagController extends Controller
         return Tag::all();
     }
 
-    public function store(TagRequest $request)
+    public function store(StoreRequest $request)
     {
         Tag::create($request->all());
 
         return response()->json(['success' => true,"message"=>"Tag created"],200);
     }
 
-    public function update(Tag $tag,TagRequest $request)
+    public function update(Tag $tag,StoreRequest $request)
     {
         $tag->update($request->all());
 

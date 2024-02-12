@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Message\StoreRequest;
 use App\Models\Message;
-use Illuminate\Http\Request;
 
 class MessageController extends Controller
 {
@@ -12,7 +12,7 @@ class MessageController extends Controller
         return Message::all();
     }
 
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
         Message::create($request->all());
 
