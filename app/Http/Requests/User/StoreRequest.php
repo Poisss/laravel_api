@@ -13,7 +13,7 @@ class StoreRequest extends ApiRequest
             "last_name" => ["required","string","max:255","alpha"],
             "patronymic"=>["nullable","string","max:255","alpha"],
             "email"=> ["required","string","email","unique:users,email","max:255"],
-            "password"=>["required","string","min:5","max:255","current_password"],
+            "password"=>["required","string","min:5","max:255"],
         ];
     }
 }

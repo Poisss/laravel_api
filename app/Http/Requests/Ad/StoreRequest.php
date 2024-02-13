@@ -11,12 +11,15 @@ class StoreRequest extends ApiRequest
     {
         return [
             "user_id"=>["required","exists:users,id"],
-            "contractor_id"=>["required","exists:users,id"],
-            "title"=>["required","string","max:155","alpha_num"],
+            "contractor_id"=>["nullable","exists:users,id"],
+            "title"=>["required","string","max:155"],
             "text"=>["required","string"],
             "from"=>["required","date","after:tomorrow"],
-            "until"=>["required","date","after:from"],
-            "tags.*.id"=>["required"]
+            "until"=>["required","date","after_or_equal:from"],
+            "tags"=>["nullable","array"],
+            "tags.*.id"=>["present","exists:tags,id"],
+            "images"=>["nullable","array"],
+            "images.*.image"=>['present','image','mimes:jpg,pdf,png,jfif'],
         ];
     }
 }

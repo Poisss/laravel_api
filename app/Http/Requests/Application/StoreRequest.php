@@ -2,27 +2,17 @@
 
 namespace App\Http\Requests\Application;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\ApiRequest;
 
-class StoreRequest extends FormRequest
+class StoreRequest extends ApiRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
-    {
-        return false;
-    }
-
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
-            //
+            'ad_id'=>["required","exists:ads,id"],
+            'user_id'=>["required","exists:users,id"],
+            'price'=>['required','decimal:2'],
+            'marked'=>["nullable",'boolean'],
         ];
     }
 }
