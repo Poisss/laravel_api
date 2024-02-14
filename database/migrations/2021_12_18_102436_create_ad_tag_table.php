@@ -13,7 +13,7 @@ class CreateAdTagsTable extends Migration
      */
     public function up()
     {
-        Schema::create('ad_tags', function (Blueprint $table) {
+        Schema::create('ad_tag', function (Blueprint $table) {
             $table->foreignId('ad_id')->constrained('ads')->cascadeOnDelete();
             $table->foreignId('tag_id')->constrained('tags')->cascadeOnDelete();
             $table->timestamps();

@@ -40,9 +40,9 @@ class UserController extends Controller
     {
         return response()->json(['success' => true,"auth"=>true],200);
     }
-    public function show($id)
+    public function show(User $user)
     {
-        return User::find($id);
+        return $user;
 
         // Поиск по полю email
         // return User::query()->where('email',$id)->get();

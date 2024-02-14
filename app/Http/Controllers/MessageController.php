@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Message\StoreRequest;
 use App\Models\Message;
+use Illuminate\Support\Facades\Request;
 
 class MessageController extends Controller
 {
-    public function index()
+    public function index($id)
     {
-        return Message::all();
+        return Message::query()->where('application_id',$id)->get();
     }
 
     public function store(StoreRequest $request)

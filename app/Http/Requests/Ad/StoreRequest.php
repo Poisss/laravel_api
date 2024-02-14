@@ -17,7 +17,7 @@ class StoreRequest extends ApiRequest
             "from"=>["required","date","after:tomorrow"],
             "until"=>["required","date","after_or_equal:from"],
             "tags"=>["nullable","array"],
-            "tags.*.id"=>["present","exists:tags,id"],
+            "tags.*"=>["present","exists:tags,id"],
             "images"=>["nullable","array"],
             "images.*.image"=>['present','image','mimes:jpg,pdf,png,jfif'],
         ];

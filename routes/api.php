@@ -52,8 +52,11 @@ Route::apiResource('/ads', AdsController::class);
 
 Route::apiResource('/applications', ApplicationController::class)->only('store');
 
-Route::apiResource('/messages', MessageController::class)->only('index','store');
+Route::apiResource('/messages', MessageController::class)->only('store');
 
+Route::get('/applications/{id}/messages',[MessageController::class,'index']);
+
+Route::post('/applications/{id}/messages',[MessageController::class,'store']);
 
 
 

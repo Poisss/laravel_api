@@ -12,8 +12,12 @@ class Tag extends Model
     protected $fillable = [
         'name',
     ];
-    public function ad_tag()
+    // public function ad_tag()
+    // {
+    //     return $this->hasMany(Ad_tag::class);
+    // }
+    public function ad()
     {
-        return $this->hasMany(Ad_tag::class);
+        return $this->belongsToMany(Ad::class)->withTimestamps();
     }
 }

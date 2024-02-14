@@ -22,27 +22,22 @@ class AdsController extends Controller
         //     }
         // }
         if($request->filled('tags')){
-            foreach($request->tags as $tag){
-                $ad->ad_tag()->create(['ad_id'=>$ad->id,'tag_id'=>$tag['id']]);
-            }
+            $ad->tag()->sync($request->tags);
         }
+
         return response()->json(['success' => true,"message"=>"Ad created"],200);
     }
 
-    public function show($id)
+    public function show(Ad $ad)
     {
-        return Ad::find($id);
+        return $ad;
     }
 
     public function update(Ad $ad,StoreRequest $request)
     {
         $ad->update($request->all());
-        //доделать
-        foreach($request->tags as $tag){
-            $tag['id'];
-        }
 
-        $ad->ad_tag()->sync();
+        $ad->tag()->sync($request->tags);
 
         return response()->json(['success' => true,"message"=>"Ad updated"],200);;
     }
