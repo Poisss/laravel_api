@@ -14,7 +14,7 @@ class AdsController extends Controller
 
     public function store(StoreRequest $request)
     {
-        $ad=Ad::create($request->all());
+        $ad=Ad::create($request->validated());
 
         // if($request->filled('images')){
         //     foreach($request->images as $image){
@@ -35,7 +35,7 @@ class AdsController extends Controller
 
     public function update(Ad $ad,StoreRequest $request)
     {
-        $ad->update($request->all());
+        $ad->update($request->validated());
 
         $ad->tag()->sync($request->tags);
 

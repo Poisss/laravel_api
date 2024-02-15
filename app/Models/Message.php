@@ -14,4 +14,12 @@ class Message extends Model
         'user_id',
         'text',
     ];
+    public function application()
+    {
+        return $this->belongsTo(Application::class);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -14,14 +14,14 @@ class TagController extends Controller
 
     public function store(StoreRequest $request)
     {
-        Tag::create($request->all());
+        Tag::create($request->validated());
 
         return response()->json(['success' => true,"message"=>"Tag created"],200);
     }
 
     public function update(Tag $tag,StoreRequest $request)
     {
-        $tag->update($request->all());
+        $tag->update($request->validated());
 
         return response()->json(['success' => true,"message"=>"Tag updated"],200);;
     }
