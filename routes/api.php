@@ -40,7 +40,7 @@ use Illuminate\Support\Facades\Route;
 
 // });
 
-Route::get('/login',[UserController::class,'login']);
+Route::post('/login',[UserController::class,'login']);
 
 Route::post('/signup',[UserController::class,'signup']);
 
@@ -54,9 +54,29 @@ Route::apiResource('/applications', ApplicationController::class)->only('store')
 
 Route::apiResource('/messages', MessageController::class)->only('store');
 
+Route::apiResource('/images', ImageController::class)->only('store');
+
 Route::get('/applications/{message:application_id}/messages',[MessageController::class,'index']);
 
 Route::post('/applications/{id}/messages',[MessageController::class,'store']);
 
 
+// Route::middleware('auth:sanctum')->group(function(){
+//     Route::apiResource('/tags', TagController::class)->only('store','update');
+//     Route::apiResource('/ads', TagController::class)->only('store','update');
+//     Route::apiResource('/applications', ApplicationController::class)->only('store');
+//     Route::apiResource('/messages', MessageController::class)->only('store');
+//     Route::apiResource('/images', ImageController::class)->only('store');
+// });
 
+// Route::post('/login',[UserController::class,'login']);
+
+// Route::post('/signup',[UserController::class,'signup']);
+
+// Route::apiResource('/users',UserController::class)->only('show');
+
+// Route::apiResource('/tags', TagController::class)->except('show','store','update');
+
+// Route::apiResource('/ads', AdsController::class)->except('store','update');
+
+// Route::get('/applications/{message:application_id}/messages',[MessageController::class,'index']);

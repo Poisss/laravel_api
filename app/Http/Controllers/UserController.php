@@ -6,6 +6,8 @@ use App\Http\Requests\user\LoginRequest;
 use App\Models\User;
 use App\Http\Requests\User\StoreRequest;
 use App\Http\Resources\UserResource;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -32,7 +34,7 @@ class UserController extends Controller
         // return response()->json(["message"=>"User created"],200);
 
         // Второй способ валидации это использовать Кастомизированые request как в это UserRequest
-        $user=User::create($request->validated());
+        $user=User::create(['password'=>Hash::make($request->password)]+$request->validated());
 
         return (new UserResource($user))->response()->setStatusCode(201);
 
@@ -40,7 +42,16 @@ class UserController extends Controller
 
     public function login(LoginRequest $request)
     {
-        return response()->json(["data"=>['token' =>'просто строка, пока без токена']],200);
+        if(Auth::attempt($request->only(['email','password']))){
+            return response()->json([
+                    "data"=>['token' =>Auth::user()->createToken('api')->plainTextToken
+            ]],200);
+        }
+        else{
+            return response()->json(["data"=>['message' =>'неудалось']],200);
+        }
+
+
     }
     public function show(User $user)
     {

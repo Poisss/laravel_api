@@ -19,7 +19,9 @@ class StoreRequest extends ApiRequest
             "tags"=>["nullable","array"],
             "tags.*"=>["present","exists:tags,id"],
             "images"=>["nullable","array"],
-            "images.*.image"=>['present','image','mimes:jpg,pdf,png,jfif'],
+            "images.*.name"=>["present","string","max:50"],
+            "images.*.description"=>["nullable","string","max:255"],
+            "images.*.file"=>["present","file","mimes:jpg,pdf,png,jfif"],
         ];
     }
 }

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Image\StoreRequest;
+use App\Http\Resources\ImageResource;
+use App\Models\Image;
 use Illuminate\Http\Request;
 
 class ImageController extends Controller
@@ -11,9 +14,11 @@ class ImageController extends Controller
         return ['Изображение 1','Изображение 2'];
     }
 
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        return 'Изображение создано';
+        $image=Image::create($request->validated());
+
+        return (new ImageResource($image))->response()->setStatusCode(201);
     }
 
     public function show(string $id)

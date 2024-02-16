@@ -26,12 +26,12 @@ class AdsController extends Controller
             $ad->tag()->sync($request->tags);
         }
 
-        return response()->json(['success' => true,"message"=>"Ad created"],201);
+        return (new AdResource($ad))->response()->setStatusCode(201);
     }
 
     public function show(Ad $ad)
     {
-        return $ad;
+        return (new AdResource($ad))->response()->setStatusCode(200);
     }
 
     public function update(Ad $ad,StoreRequest $request)
@@ -40,7 +40,7 @@ class AdsController extends Controller
 
         $ad->tag()->sync($request->tags);
 
-        return response()->json(['success' => true,"message"=>"Ad updated"],200);;
+        return (new AdResource($ad))->response()->setStatusCode(200);
     }
 
     public function destroy(Ad $ad)

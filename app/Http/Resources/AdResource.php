@@ -15,13 +15,18 @@ class AdResource extends JsonResource
             'from' => $this->from,
             'until' => $this->until,
             'tags' => TagResource::collection($this->tag),
+            'images' => $this->image->map(function($image) {
+                return $image->name;
+            }),
             'user' => new UserResource($this->user),
             'contractor' => new UserResource($this->contractor),
-            'applications' => [
-                                'id'=>$this->application['id'],
-                                'user'=>$this->application['user_id'],
-                                'price'=>$this->application['price'],
-            ],
+            'applications' => $this->application->map(function($application) {
+                return [
+                    'id' => $application->id,
+                    'user' => $application->user_id,
+                    'price' => $application->price,
+                ];
+            }),
         ];
     }
 }

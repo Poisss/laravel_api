@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Application\StoreRequest;
+use App\Http\Resources\ApplicationResource;
 use App\Models\Application;
 
 class ApplicationController extends Controller
@@ -10,9 +11,9 @@ class ApplicationController extends Controller
 
     public function store(StoreRequest $request)
     {
-        Application::create($request->validated());
+        $application=Application::create($request->validated());
 
-        return response()->json(['success' => true,"message"=>"Application created"],201);
+        return (new ApplicationResource($application))->response()->setStatusCode(201);
     }
 
 }
