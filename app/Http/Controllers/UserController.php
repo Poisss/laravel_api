@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\user\LoginRequest;
 use App\Models\User;
 use App\Http\Requests\User\StoreRequest;
+use App\Http\Resources\UserResource;
 
 class UserController extends Controller
 {
@@ -33,7 +34,7 @@ class UserController extends Controller
         // Второй способ валидации это использовать Кастомизированые request как в это UserRequest
         $user=User::create($request->validated());
 
-        return response()->json(["data"=>['id' => $user->id,"full_name"=>$user->first_name." ".$user->last_name." ".$user->patronymic]],200);
+        return (new UserResource($user))->response()->setStatusCode(201);
 
     }
 
@@ -43,7 +44,7 @@ class UserController extends Controller
     }
     public function show(User $user)
     {
-        return response()->json(["data"=>$user],200);
+        return (new UserResource($user))->response()->setStatusCode(200);
 
         // Поиск по полю email
         // return User::query()->where('email',$id)->get();

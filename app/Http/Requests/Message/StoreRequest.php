@@ -11,7 +11,7 @@ class StoreRequest extends ApiRequest
         return [
             "application_id"=>["required","exists:applications,id"],
             "user_id"=>["required","exists:users,id"],
-            "text"=>["required","string","alpha_dash","max:255"],
+            "text"=>["required","string","max:255"],
         ];
     }
 }

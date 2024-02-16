@@ -33,4 +33,8 @@ class Ad extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function contractor()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

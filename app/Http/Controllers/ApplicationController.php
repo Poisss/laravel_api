@@ -12,7 +12,7 @@ class ApplicationController extends Controller
     {
         Application::create($request->validated());
 
-        return response()->json(['success' => true,"message"=>"Application created"],200);
+        return response()->json(['success' => true,"message"=>"Application created"],201);
     }
 
 }

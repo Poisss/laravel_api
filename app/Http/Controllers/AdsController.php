@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Ad\StoreRequest;
+use App\Http\Resources\AdResource;
 use App\Models\Ad;
 
 class AdsController extends Controller
 {
     public function index()
     {
-        return Ad::all();
+        return AdResource::collection(Ad::all())->response()->setStatusCode(200);
     }
 
     public function store(StoreRequest $request)
@@ -25,7 +26,7 @@ class AdsController extends Controller
             $ad->tag()->sync($request->tags);
         }
 
-        return response()->json(['success' => true,"message"=>"Ad created"],200);
+        return response()->json(['success' => true,"message"=>"Ad created"],201);
     }
 
     public function show(Ad $ad)
@@ -42,10 +43,10 @@ class AdsController extends Controller
         return response()->json(['success' => true,"message"=>"Ad updated"],200);;
     }
 
-    public function destroy($id)
+    public function destroy(Ad $ad)
     {
-        $ad=Ad::find($id);
         $ad->delete();
-        return response()->json(['success' => true,"message"=>"Ad deleted"],200);;
+
+        return response(null,204);
     }
 }

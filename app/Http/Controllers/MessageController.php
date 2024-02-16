@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Message\StoreRequest;
+use App\Http\Resources\MessageResource;
 use App\Models\Message;
 use Illuminate\Support\Facades\Request;
 
@@ -10,14 +11,14 @@ class MessageController extends Controller
 {
     public function index($id)
     {
-        return Message::query()->where('application_id',$id)->get();
+        return MessageResource::collection(Message::query()->where('application_id',$id)->get())->response()->setStatusCode(200);
     }
 
     public function store(StoreRequest $request)
     {
-        Message::create($request->validated());
+        $message=Message::create($request->validated());
 
-        return response()->json(['success' => true,"message"=>"Message created"],200);
+        return (new MessageResource($message))->response()->setStatusCode(201);
     }
 
 }

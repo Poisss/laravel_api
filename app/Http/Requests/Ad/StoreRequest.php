@@ -11,7 +11,7 @@ class StoreRequest extends ApiRequest
     {
         return [
             "user_id"=>["required","exists:users,id"],
-            "contractor_id"=>["nullable","exists:users,id"],
+            "contractor_id"=>["nullable","exists:users,id","different:user_id"],
             "title"=>["required","string","max:155"],
             "text"=>["required","string"],
             "from"=>["required","date","after:tomorrow"],

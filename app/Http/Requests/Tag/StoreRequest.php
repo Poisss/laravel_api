@@ -9,7 +9,7 @@ class StoreRequest extends ApiRequest
     public function rules(): array
     {
         return [
-            "name"=>["required","string","max:60","alpha"]
+            "name"=>["required","string","max:60","alpha","unique:tags,name"]
         ];
     }
 }

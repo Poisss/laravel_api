@@ -3,33 +3,34 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Tag\StoreRequest;
+use App\Http\Resources\TagResource;
 use App\Models\Tag;
 
 class TagController extends Controller
 {
     public function index()
     {
-        return Tag::all();
+        return TagResource::collection(Tag::all())->response()->setStatusCode(200);
     }
 
     public function store(StoreRequest $request)
     {
-        Tag::create($request->validated());
+        $tag=Tag::create($request->validated());
 
-        return response()->json(['success' => true,"message"=>"Tag created"],200);
+        return (new TagResource($tag))->response()->setStatusCode(201);
     }
 
     public function update(Tag $tag,StoreRequest $request)
     {
         $tag->update($request->validated());
 
-        return response()->json(['success' => true,"message"=>"Tag updated"],200);;
+        return (new TagResource($tag))->response()->setStatusCode(200);
     }
 
-    public function destroy($id)
+    public function destroy(Tag $tag)
     {
-        $tag=Tag::find($id);
         $tag->delete();
-        return response()->json(['success' => true,"message"=>"Tag deleted"],200);;
+
+        return response(null,204);
     }
 }
