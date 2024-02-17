@@ -11,9 +11,8 @@ class StoreRequest extends ApiRequest
     {
         return [
             "ad_id"=>["required","exists:ads,id"],
-            "name"=>["present","string","max:50"],
             "description"=>["nullable","string","max:255"],
-            "file"=>["present","file","mimes:jpg,pdf,png,jfif"],
+            "image"=>["present","file","mimes:jpg,pdf,png,jfif"],
         ];
     }
 }

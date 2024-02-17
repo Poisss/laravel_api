@@ -18,10 +18,6 @@ class StoreRequest extends ApiRequest
             "until"=>["required","date","after_or_equal:from"],
             "tags"=>["nullable","array"],
             "tags.*"=>["present","exists:tags,id"],
-            "images"=>["nullable","array"],
-            "images.*.name"=>["present","string","max:50"],
-            "images.*.description"=>["nullable","string","max:255"],
-            "images.*.file"=>["present","file","mimes:jpg,pdf,png,jfif"],
         ];
     }
 }

@@ -40,43 +40,46 @@ use Illuminate\Support\Facades\Route;
 
 // });
 
-Route::post('/login',[UserController::class,'login']);
-
-Route::post('/signup',[UserController::class,'signup']);
-
-Route::apiResource('/users',UserController::class)->only('show');
-
-Route::apiResource('/tags', TagController::class)->except('show');
-
-Route::apiResource('/ads', AdsController::class);
-
-Route::apiResource('/applications', ApplicationController::class)->only('store');
-
-Route::apiResource('/messages', MessageController::class)->only('store');
-
-Route::apiResource('/images', ImageController::class)->only('store');
-
-Route::get('/applications/{message:application_id}/messages',[MessageController::class,'index']);
-
-Route::post('/applications/{id}/messages',[MessageController::class,'store']);
-
-
-// Route::middleware('auth:sanctum')->group(function(){
-//     Route::apiResource('/tags', TagController::class)->only('store','update');
-//     Route::apiResource('/ads', TagController::class)->only('store','update');
-//     Route::apiResource('/applications', ApplicationController::class)->only('store');
-//     Route::apiResource('/messages', MessageController::class)->only('store');
-//     Route::apiResource('/images', ImageController::class)->only('store');
-// });
-
 // Route::post('/login',[UserController::class,'login']);
 
 // Route::post('/signup',[UserController::class,'signup']);
 
 // Route::apiResource('/users',UserController::class)->only('show');
 
-// Route::apiResource('/tags', TagController::class)->except('show','store','update');
+// Route::apiResource('/tags', TagController::class)->except('show');
 
-// Route::apiResource('/ads', AdsController::class)->except('store','update');
+// Route::apiResource('/ads', AdsController::class);
+
+// Route::apiResource('/applications', ApplicationController::class)->only('store');
+
+// Route::apiResource('/messages', MessageController::class)->only('store');
+
+// Route::apiResource('/images', ImageController::class)->only('store');
 
 // Route::get('/applications/{message:application_id}/messages',[MessageController::class,'index']);
+
+// Route::post('/applications/{id}/messages',[MessageController::class,'store']);
+
+
+Route::middleware('auth:sanctum')->group(function(){
+    Route::apiResource('/tags', TagController::class)->only('store','update','destroy');
+    Route::apiResource('/ads', AdsController::class)->only('store','update','destroy');
+    Route::apiResource('/applications', ApplicationController::class)->only('store');
+    Route::apiResource('/messages', MessageController::class)->only('store');
+    Route::apiResource('/images', ImageController::class)->only('store');
+});
+
+Route::post('/login',[UserController::class,'login']);
+
+Route::post('/signup',[UserController::class,'signup']);
+
+Route::apiResource('/users',UserController::class)->only('show');
+
+Route::apiResource('/tags', TagController::class)->only('index');
+
+Route::apiResource('/ads', AdsController::class)->only('index','show');
+
+Route::get('/applications/{message:application_id}/messages',[MessageController::class,'index']);
+
+Route::get('/download/images/{image}',[ImageController::class,'download']);
+
